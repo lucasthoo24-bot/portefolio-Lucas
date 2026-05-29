@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact — Thomas Lucas</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #faf9f6;
+      --surface: #ffffff;
+      --border: rgba(0, 0, 0, 0.06);
+      --text: #111111;
+      --muted: #6f6e6a;
+      --radius: 16px;
+      --mono: 'JetBrains Mono', monospace;
+      --sans: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: var(--sans); background: var(--bg); color: var(--text); line-height: 1.6; }
+    .container { max-width: 760px; margin: 0 auto; padding: 0 24px; }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(250, 249, 246, 0.8); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border);
+    }
+    nav .container { display: flex; align-items: center; justify-content: space-between; height: 70px; }
+    .nav-logo { font-family: var(--mono); font-size: 13px; font-weight: 500; color: var(--text); text-decoration: none; }
+    .nav-links { display: flex; gap: 28px; list-style: none; }
+    .nav-links a { font-size: 14px; color: var(--muted); text-decoration: none; font-weight: 500; transition: color 0.2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--text); }
+
+    /* CONTACT */
+    #contact { padding: 140px 0 100px 0; }
+    .section-label { font-family: var(--mono); font-size: 11px; color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 12px; }
+    .section-title { font-size: 28px; font-weight: 700; margin-bottom: 44px; letter-spacing: -0.02em; }
+    
+    .contact-box { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 40px; }
+    .contact-box p { color: var(--muted); margin-bottom: 28px; }
+    
+    .contact-links { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 36px; }
+    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px; border-radius: 12px; font-size: 14px; font-weight: 600; text-decoration: none; transition: all 0.2s; }
+    .btn-ghost { background: var(--bg); color: var(--text); border: 1px solid rgba(0,0,0,0.04); }
+    .btn-ghost:hover { border-color: var(--text); transform: translateY(-2px); }
+    .btn-primary { background: var(--text); color: #fff; border: none; cursor: pointer; }
+    .btn-primary:hover { background: #333; transform: translateY(-2px); }
+
+    .contact-form { display: grid; gap: 20px; }
+    .form-group { display: grid; gap: 6px; }
+    .contact-form label { font-size: 13px; font-weight: 600; }
+    .contact-form input, .contact-form textarea {
+      width: 100%; padding: 14px 16px; border: 1px solid var(--border); border-radius: 10px;
+      background: var(--bg); color: var(--text); font: inherit; font-size: 14px; transition: border-color 0.2s; resize: vertical;
+    }
+    .contact-form input:focus, .contact-form textarea:focus { outline: none; border-color: var(--text); }
+    .contact-form button { justify-self: start; margin-top: 8px; }
+
+    footer { padding: 40px 0; border-top: 1px solid var(--border); margin-top: 100px; }
+    footer .container { display: flex; justify-content: space-between; align-items: center; }
+    footer p { font-size: 13px; color: var(--muted); }
+    footer span { font-family: var(--mono); font-size: 11px; color: var(--muted); }
+
+    .fade-in { opacity: 0; transform: translateY(16px); transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="container">
+      <a href="portfolio.html" class="nav-logo">thomas.lucas</a>
+      <ul class="nav-links">
+        <li><a href="portfolio.html">À propos</a></li>
+        <li><a href="projet.html">Projets</a></li>
+        <li><a href="contact.html" class="active">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="container">
+    <section id="contact" class="fade-in">
+      <p class="section-label">03 — Contact</p>
+      <h2 class="section-title">Discutons ensemble</h2>
+      
+      <div class="contact-box">
+        <p>Pour une opportunité de stage ou une simple collaboration technique, mes canaux restent ouverts.</p>
+        
+        <div class="contact-links">
+          <a href="mailto:Lucas.thoo24@gmail.com" class="btn btn-ghost">✉ Lucas.thoo24@gmail.com</a>
+          <a href="tel:0785554409" class="btn btn-ghost">📞 07 85 55 44 09</a>
+          <a href="https://linkedin.com" target="_blank" rel="noreferrer" class="btn btn-ghost">⌥ LinkedIn</a>
+        </div>
+
+        <form class="contact-form" action="mailto:Lucas.thoo24@gmail.com" method="post" enctype="text/plain">
+          <div class="form-group">
+            <label for="name">Nom complet</label>
+            <input type="text" id="name" name="name" required>
+          </div>
+
+          <div class="form-group">
+            <label for="email">Adresse email</label>
+            <input type="email" id="email" name="email" required>
+          </div>
+
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="5" required></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-primary">Envoyer le message</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>© 202_6 Thomas Lucas</p>
+      <span>BTS SIO · SLAM</span>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const el = document.querySelector('.fade-in');
+      setTimeout(() => el.classList.add('visible'), 50);
+    });
+  </script>
+</body>
+</html>

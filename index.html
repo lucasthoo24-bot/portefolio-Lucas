@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Thomas Lucas — Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #faf9f6;
+      --surface: #ffffff;
+      --border: rgba(0, 0, 0, 0.06);
+      --text: #111111;
+      --muted: #6f6e6a;
+      --accent: #2563eb;
+      --accent-light: #f0f4ff;
+      --radius: 16px;
+      --mono: 'JetBrains Mono', monospace;
+      --sans: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--sans);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(250, 249, 246, 0.8);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+    nav .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 70px;
+    }
+    .nav-logo {
+      font-family: var(--mono);
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text);
+      text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 28px; list-style: none; }
+    .nav-links a {
+      font-size: 14px;
+      color: var(--muted);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--text); }
+
+    /* HERO */
+    #hero { padding: 180px 0 100px 0; }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--accent);
+      background: var(--accent-light);
+      padding: 6px 14px;
+      border-radius: 99px;
+      margin-bottom: 32px;
+      font-weight: 500;
+    }
+    .badge::before {
+      content: '';
+      width: 6px; height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+    h1 {
+      font-size: clamp(38px, 7vw, 54px);
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      margin-bottom: 24px;
+    }
+    h1 span { color: var(--accent); }
+    .hero-desc {
+      font-size: 18px;
+      color: var(--muted);
+      max-width: 520px;
+      margin-bottom: 40px;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 24px;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .btn-primary { background: var(--text); color: #fff; }
+    .btn-primary:hover { background: #333; transform: translateY(-2px); }
+    .btn-ghost { background: var(--surface); color: var(--text); border: 1px solid rgba(0,0,0,0.08); }
+    .btn-ghost:hover { border-color: var(--text); transform: translateY(-2px); }
+
+    /* ABOUT */
+    #about { padding: 100px 0; border-top: 1px solid var(--border); }
+    .section-label {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .section-title { font-size: 28px; font-weight: 700; margin-bottom: 44px; letter-spacing: -0.02em; }
+    .about-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 48px; }
+    .about-text p { color: var(--muted); margin-bottom: 20px; }
+    .about-info { display: flex; flex-direction: column; gap: 12px; }
+    .info-row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 14px 18px; background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+    }
+    .info-label { font-family: var(--mono); font-size: 11px; color: var(--muted); text-transform: uppercase; }
+    .info-value { font-size: 14px; font-weight: 600; }
+
+    footer { padding: 40px 0; border-top: 1px solid var(--border); margin-top: 100px; }
+    footer .container { display: flex; justify-content: space-between; align-items: center; }
+    footer p { font-size: 13px; color: var(--muted); }
+    footer span { font-family: var(--mono); font-size: 11px; color: var(--muted); }
+
+    .fade-in { opacity: 0; transform: translateY(16px); transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 680px) {
+      .about-grid { grid-template-columns: 1fr; gap: 32px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="container">
+      <a href="portfolio.html" class="nav-logo">thomas.lucas</a>
+      <ul class="nav-links">
+        <li><a href="portfolio.html" class="active">À propos</a></li>
+        <li><a href="projet.html">Projets</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="container">
+    <section id="hero">
+      <div class="badge">Disponible pour un stage</div>
+      <h1>Salut, je suis<br><span>Thomas Lucas</span></h1>
+      <p class="hero-desc">
+        Étudiant en BTS SIO option SLAM. Passionné par la conception d'interfaces minimalistes et le développement d'applications web robustes.
+      </p>
+      <div class="hero-cta">
+        <a href="projet.html" class="btn btn-primary">Voir mes projets</a>
+        <a href="contact.html" class="btn btn-ghost">Me contacter</a>
+      </div>
+    </section>
+
+    <section id="about" class="fade-in">
+      <p class="section-label">01 — Parcours</p>
+      <h2 class="section-title">Qui suis-je ?</h2>
+      <div class="about-grid">
+        <div class="about-text">
+          <p>Actuellement en cours de formation supérieure, je m'applique à concevoir des outils numériques fluides et performants, en plaçant le code propre au centre de ma pratique.</p>
+          <p>Curieux de nature, j'oriente mon profil vers l'architecture logicielle et les technologies modernes du web afin de répondre concrètement à des problématiques métiers.</p>
+        </div>
+        <div class="about-info">
+          <div class="info-row">
+            <span class="info-label">Formation</span>
+            <span class="info-value">BTS SIO — SLAM</span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">Localisation</span>
+            <span class="info-value">Bergerac, France</span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">Tech Stack</span>
+            <span class="info-value">Python · PHP · JS</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>© 2026 Thomas Lucas</p>
+      <span>BTS SIO · SLAM</span>
+    </div>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.05 });
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>

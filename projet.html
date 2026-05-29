@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mes Projets — Thomas Lucas</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #faf9f6;
+      --surface: #ffffff;
+      --border: rgba(0, 0, 0, 0.06);
+      --text: #111111;
+      --muted: #6f6e6a;
+      --accent: #2563eb;
+      --radius: 16px;
+      --mono: 'JetBrains Mono', monospace;
+      --sans: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: var(--sans); background: var(--bg); color: var(--text); line-height: 1.6; }
+    .container { max-width: 760px; margin: 0 auto; padding: 0 24px; }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(250, 249, 246, 0.8); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border);
+    }
+    nav .container { display: flex; align-items: center; justify-content: space-between; height: 70px; }
+    .nav-logo { font-family: var(--mono); font-size: 13px; font-weight: 500; color: var(--text); text-decoration: none; }
+    .nav-links { display: flex; gap: 28px; list-style: none; }
+    .nav-links a { font-size: 14px; color: var(--muted); text-decoration: none; font-weight: 500; transition: color 0.2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--text); }
+
+    /* PROJECTS */
+    #projets { padding: 140px 0 100px 0; }
+    .section-label { font-family: var(--mono); font-size: 11px; color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 12px; }
+    .section-title { font-size: 28px; font-weight: 700; margin-bottom: 44px; letter-spacing: -0.02em; }
+    
+    .projects-grid { display: flex; flex-direction: column; gap: 20px; }
+    .project-card {
+      background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 32px; text-decoration: none; color: inherit; display: block;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .project-card:hover {
+      border-color: rgba(0,0,0,0.15); transform: translateY(-4px); box-shadow: 0 20px 32px rgba(0, 0, 0, 0.03);
+    }
+    .project-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+    .project-title { font-size: 19px; font-weight: 600; letter-spacing: -0.01em; }
+    .project-link-arrow { font-size: 16px; color: var(--muted); transition: all 0.2s; }
+    .project-card:hover .project-link-arrow { transform: translateX(4px); color: var(--accent); }
+    .project-desc { color: var(--muted); font-size: 15px; margin-bottom: 24px; }
+    
+    .tags { display: flex; flex-wrap: wrap; gap: 8px; }
+    .tag { font-family: var(--mono); font-size: 11px; padding: 4px 10px; background: var(--bg); color: var(--muted); border-radius: 6px; font-weight: 500; }
+
+    footer { padding: 40px 0; border-top: 1px solid var(--border); margin-top: 100px; }
+    footer .container { display: flex; justify-content: space-between; align-items: center; }
+    footer p { font-size: 13px; color: var(--muted); }
+    footer span { font-family: var(--mono); font-size: 11px; color: var(--muted); }
+
+    .fade-in { opacity: 0; transform: translateY(16px); transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="container">
+      <a href="portfolio.html" class="nav-logo">thomas.lucas</a>
+      <ul class="nav-links">
+        <li><a href="portfolio.html">À propos</a></li>
+        <li><a href="projet.html" class="active">Projets</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="container">
+    <section id="projets" class="fade-in">
+      <p class="section-label">02 — Portfolio</p>
+      <h2 class="section-title">Sélection de projets</h2>
+
+      <div class="projects-grid">
+        <a href="https://github.com/votre-pseudo/projet1" target="_blank" class="project-card">
+          <div class="project-header">
+            <h3 class="project-title">Nom du projet 1</h3>
+            <span class="project-link-arrow">→</span>
+          </div>
+          <p class="project-desc">Description succincte du projet. Explication claire du cas d'usage, de l'architecture choisie et de sa valeur ajoutée.</p>
+          <div class="tags">
+            <span class="tag">Python</span>
+            <span class="tag">MySQL</span>
+            <span class="tag">Flask</span>
+          </div>
+        </a>
+
+        <a href="https://github.com/votre-pseudo/projet2" target="_blank" class="project-card">
+          <div class="project-header">
+            <h3 class="project-title">Nom du projet 2</h3>
+            <span class="project-link-arrow">→</span>
+          </div>
+          <p class="project-desc">Interface frontend moderne. Optimisation de l'expérience utilisateur et intégration de maquettes au pixel près.</p>
+          <div class="tags">
+            <span class="tag">HTML</span>
+            <span class="tag">CSS</span>
+            <span class="tag">JavaScript</span>
+          </div>
+        </a>
+
+        <a href="https://github.com/votre-pseudo/projet3" target="_blank" class="project-card">
+          <div class="project-header">
+            <h3 class="project-title">Nom du projet 3</h3>
+            <span class="project-link-arrow">→</span>
+          </div>
+          <p class="project-desc">Application dynamique back-end. Gestion sécurisée des données, sessions utilisateurs et traitement des requêtes.</p>
+          <div class="tags">
+            <span class="tag">PHP</span>
+            <span class="tag">SQL</span>
+            <span class="tag">Bootstrap</span>
+          </div>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>© 2026 Thomas Lucas</p>
+      <span>BTS SIO · SLAM</span>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const el = document.querySelector('.fade-in');
+      setTimeout(() => el.classList.add('visible'), 50);
+    });
+  </script>
+</body>
+</html>
