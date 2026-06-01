@@ -4,114 +4,181 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Contact — Thomas Lucas</title>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg: #faf9f6;
-      --surface: #ffffff;
-      --border: rgba(0, 0, 0, 0.06);
-      --text: #111111;
-      --muted: #6f6e6a;
-      --radius: 16px;
-      --mono: 'JetBrains Mono', monospace;
-      --sans: 'Plus Jakarta Sans', sans-serif;
+      --bg:       #0c0c0e;
+      --surface:  #141416;
+      --surface2: #1a1a1d;
+      --border:   rgba(255,255,255,0.07);
+      --text:     #f0ede8;
+      --muted:    #7a7875;
+      --subtle:   #3a3835;
+      --accent:   #c9a96e;
+      --accent2:  #e8d5b0;
+      --serif:    'Instrument Serif', Georgia, serif;
+      --sans:     'DM Sans', sans-serif;
+      --mono:     'DM Mono', monospace;
     }
-
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: var(--sans); background: var(--bg); color: var(--text); line-height: 1.6; }
-    .container { max-width: 760px; margin: 0 auto; padding: 0 24px; }
-
-    /* NAV */
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0; z-index: 100;
-      background: rgba(250, 249, 246, 0.8); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border);
+    body { font-family: var(--sans); background: var(--bg); color: var(--text); line-height: 1.65; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+    body::before {
+      content: ''; position: fixed; inset: 0; z-index: 0; pointer-events: none; opacity: 0.025;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      background-size: 200px;
     }
-    nav .container { display: flex; align-items: center; justify-content: space-between; height: 70px; }
-    .nav-logo { font-family: var(--mono); font-size: 13px; font-weight: 500; color: var(--text); text-decoration: none; }
-    .nav-links { display: flex; gap: 28px; list-style: none; }
-    .nav-links a { font-size: 14px; color: var(--muted); text-decoration: none; font-weight: 500; transition: color 0.2s; }
-    .nav-links a:hover, .nav-links a.active { color: var(--text); }
+    .container { max-width: 820px; margin: 0 auto; padding: 0 32px; position: relative; z-index: 1; }
 
-    /* CONTACT */
-    #contact { padding: 140px 0 100px 0; }
-    .section-label { font-family: var(--mono); font-size: 11px; color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 12px; }
-    .section-title { font-size: 28px; font-weight: 700; margin-bottom: 44px; letter-spacing: -0.02em; }
-    
-    .contact-box { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 40px; }
-    .contact-box p { color: var(--muted); margin-bottom: 28px; }
-    
-    .contact-links { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 36px; }
-    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px; border-radius: 12px; font-size: 14px; font-weight: 600; text-decoration: none; transition: all 0.2s; }
-    .btn-ghost { background: var(--bg); color: var(--text); border: 1px solid rgba(0,0,0,0.04); }
-    .btn-ghost:hover { border-color: var(--text); transform: translateY(-2px); }
-    .btn-primary { background: var(--text); color: #fff; border: none; cursor: pointer; }
-    .btn-primary:hover { background: #333; transform: translateY(-2px); }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; padding: 20px 0; transition: background 0.4s, border-color 0.4s; }
+    nav.scrolled { background: rgba(12,12,14,0.85); backdrop-filter: blur(24px); border-bottom: 1px solid var(--border); }
+    nav .container { display: flex; align-items: center; justify-content: space-between; }
+    .nav-logo { font-family: var(--mono); font-size: 13px; font-weight: 500; color: var(--accent); text-decoration: none; letter-spacing: 0.04em; }
+    .nav-links { display: flex; gap: 6px; list-style: none; }
+    .nav-links a { font-size: 13px; color: var(--muted); text-decoration: none; font-weight: 500; padding: 6px 14px; border-radius: 99px; transition: all 0.2s; }
+    .nav-links a:hover { color: var(--text); background: var(--surface2); }
+    .nav-links a.active { color: var(--text); background: var(--surface2); }
 
-    .contact-form { display: grid; gap: 20px; }
-    .form-group { display: grid; gap: 6px; }
-    .contact-form label { font-size: 13px; font-weight: 600; }
-    .contact-form input, .contact-form textarea {
-      width: 100%; padding: 14px 16px; border: 1px solid var(--border); border-radius: 10px;
-      background: var(--bg); color: var(--text); font: inherit; font-size: 14px; transition: border-color 0.2s; resize: vertical;
+    #header { padding: 180px 0 80px; }
+    .section-eyebrow {
+      font-family: var(--mono); font-size: 11px; color: var(--accent);
+      letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 16px;
+      display: flex; align-items: center; gap: 10px;
+      opacity: 0; animation: fadeUp 0.8s 0.1s forwards;
     }
-    .contact-form input:focus, .contact-form textarea:focus { outline: none; border-color: var(--text); }
-    .contact-form button { justify-self: start; margin-top: 8px; }
+    .section-eyebrow::after { content: ''; flex: 1; height: 1px; background: var(--border); max-width: 60px; }
+    h1 {
+      font-family: var(--serif); font-size: clamp(42px, 7vw, 72px);
+      font-weight: 400; line-height: 1.08; letter-spacing: -0.02em; margin-bottom: 20px;
+      opacity: 0; animation: fadeUp 0.8s 0.2s forwards;
+    }
+    h1 em { font-style: italic; color: var(--accent); }
+    .page-desc {
+      font-size: 16px; color: var(--muted); max-width: 420px; line-height: 1.7;
+      opacity: 0; animation: fadeUp 0.8s 0.3s forwards;
+    }
 
-    footer { padding: 40px 0; border-top: 1px solid var(--border); margin-top: 100px; }
+    #contact { padding: 60px 0 120px; }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1.6fr; gap: 48px; align-items: start; }
+
+    .contact-links-col { display: flex; flex-direction: column; gap: 2px; }
+    .contact-link {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 18px 22px;
+      background: var(--surface); border: 1px solid var(--border);
+      text-decoration: none; color: var(--text); transition: all 0.2s;
+    }
+    .contact-link:first-child { border-radius: 14px 14px 2px 2px; }
+    .contact-link:last-child  { border-radius: 2px 2px 14px 14px; }
+    .contact-link:hover { background: var(--surface2); border-color: rgba(201,169,110,0.25); }
+    .contact-link:hover .cl-arrow { color: var(--accent); transform: rotate(-45deg); }
+    .cl-label { font-family: var(--mono); font-size: 10.5px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 4px; }
+    .cl-value { font-size: 14px; font-weight: 500; }
+    .cl-arrow { font-size: 16px; color: var(--subtle); transition: all 0.25s; }
+
+    .contact-form { display: flex; flex-direction: column; gap: 18px; }
+    .form-group { display: flex; flex-direction: column; gap: 8px; }
+    .form-group label { font-size: 12px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; font-family: var(--mono); }
+    .form-group input,
+    .form-group textarea {
+      width: 100%; padding: 14px 18px;
+      background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
+      color: var(--text); font: inherit; font-size: 14.5px;
+      transition: border-color 0.2s, background 0.2s;
+      resize: vertical; outline: none;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus { border-color: rgba(201,169,110,0.5); background: var(--surface2); }
+    .form-group input::placeholder,
+    .form-group textarea::placeholder { color: var(--subtle); }
+    .btn-submit {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 14px 30px; border-radius: 10px;
+      background: var(--accent); color: #0c0c0e;
+      font: 600 14px/1 var(--sans);
+      border: none; cursor: pointer; align-self: flex-start;
+      transition: all 0.25s cubic-bezier(0.16,1,0.3,1);
+    }
+    .btn-submit:hover { background: var(--accent2); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(201,169,110,0.25); }
+
+    footer { padding: 48px 0; border-top: 1px solid var(--border); margin-top: 40px; }
     footer .container { display: flex; justify-content: space-between; align-items: center; }
     footer p { font-size: 13px; color: var(--muted); }
-    footer span { font-family: var(--mono); font-size: 11px; color: var(--muted); }
+    footer span { font-family: var(--mono); font-size: 11px; color: var(--subtle); }
 
-    .fade-in { opacity: 0; transform: translateY(16px); transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
-    .fade-in.visible { opacity: 1; transform: translateY(0); }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: none; } }
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+    .reveal.in { opacity: 1; transform: none; }
+    .reveal-d1 { transition-delay: 0.1s; }
+
+    @media (max-width: 680px) {
+      .contact-grid { grid-template-columns: 1fr; }
+      footer .container { flex-direction: column; gap: 8px; text-align: center; }
+    }
   </style>
 </head>
 <body>
 
-  <nav>
+  <nav id="nav">
     <div class="container">
-      <a href="portfolio.html" class="nav-logo">thomas.lucas</a>
+      <a href="index.html" class="nav-logo">tl.dev</a>
       <ul class="nav-links">
-        <li><a href="portfolio.html">À propos</a></li>
+        <li><a href="index.html">À propos</a></li>
         <li><a href="projet.html">Projets</a></li>
         <li><a href="contact.html" class="active">Contact</a></li>
       </ul>
     </div>
   </nav>
 
+  <section id="header" class="container">
+    <p class="section-eyebrow">03 — Contact</p>
+    <h1>Travaillons<br><em>ensemble.</em></h1>
+    <p class="page-desc">Stage, collaboration ou simple curiosité — je suis disponible et ouvert à la discussion.</p>
+  </section>
+
   <main class="container">
-    <section id="contact" class="fade-in">
-      <p class="section-label">03 — Contact</p>
-      <h2 class="section-title">Discutons ensemble</h2>
-      
-      <div class="contact-box">
-        <p>Pour une opportunité de stage ou une simple collaboration technique, mes canaux restent ouverts.</p>
-        
-        <div class="contact-links">
-          <a href="mailto:Lucas.thoo24@gmail.com" class="btn btn-ghost">✉ Lucas.thoo24@gmail.com</a>
-          <a href="tel:0785554409" class="btn btn-ghost">📞 07 85 55 44 09</a>
-          <a href="https://linkedin.com" target="_blank" rel="noreferrer" class="btn btn-ghost">⌥ LinkedIn</a>
+    <section id="contact">
+      <div class="contact-grid">
+
+        <div class="contact-links-col reveal">
+          <a href="mailto:Lucas.thoo24@gmail.com" class="contact-link">
+            <div>
+              <p class="cl-label">Email</p>
+              <p class="cl-value">Lucas.thoo24@gmail.com</p>
+            </div>
+            <span class="cl-arrow">↗</span>
+          </a>
+          <a href="tel:0785554409" class="contact-link">
+            <div>
+              <p class="cl-label">Téléphone</p>
+              <p class="cl-value">07 85 55 44 09</p>
+            </div>
+            <span class="cl-arrow">↗</span>
+          </a>
+          <a href="https://linkedin.com" target="_blank" rel="noreferrer" class="contact-link">
+            <div>
+              <p class="cl-label">LinkedIn</p>
+              <p class="cl-value">Thomas Lucas</p>
+            </div>
+            <span class="cl-arrow">↗</span>
+          </a>
         </div>
 
-        <form class="contact-form" action="mailto:Lucas.thoo24@gmail.com" method="post" enctype="text/plain">
+        <form class="contact-form reveal reveal-d1" action="mailto:Lucas.thoo24@gmail.com" method="post" enctype="text/plain">
           <div class="form-group">
             <label for="name">Nom complet</label>
-            <input type="text" id="name" name="name" required>
+            <input type="text" id="name" name="name" placeholder="Jean Dupont" required />
           </div>
-
           <div class="form-group">
             <label for="email">Adresse email</label>
-            <input type="email" id="email" name="email" required>
+            <input type="email" id="email" name="email" placeholder="jean@exemple.fr" required />
           </div>
-
           <div class="form-group">
             <label for="message">Message</label>
-            <textarea id="message" name="message" rows="5" required></textarea>
+            <textarea id="message" name="message" rows="6" placeholder="Votre message..." required></textarea>
           </div>
-
-          <button type="submit" class="btn btn-primary">Envoyer le message</button>
+          <button type="submit" class="btn-submit">Envoyer →</button>
         </form>
+
       </div>
     </section>
   </main>
@@ -124,10 +191,12 @@
   </footer>
 
   <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const el = document.querySelector('.fade-in');
-      setTimeout(() => el.classList.add('visible'), 50);
-    });
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 40); });
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); observer.unobserve(e.target); } });
+    }, { threshold: 0.07 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
   </script>
 </body>
 </html>
