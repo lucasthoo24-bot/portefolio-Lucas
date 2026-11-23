@@ -16,6 +16,7 @@
       --subtle:   #3a3835;
       --accent:   #c9a96e;
       --accent2:  #e8d5b0;
+      --neon:     #f0c674;
       --serif:    'Instrument Serif', Georgia, serif;
       --sans:     'DM Sans', sans-serif;
       --mono:     'DM Mono', monospace;
@@ -76,9 +77,7 @@
       border-radius: 99px; background: rgba(201,169,110,0.06);
     }
     .stage-label svg { width: 16px; height: 16px; }
-
     .stage-row { display: flex; align-items: center; gap: 14px; }
-
     .arrow {
       width: 40px; height: 40px; border-radius: 50%;
       background: var(--surface); border: 1px solid var(--border);
@@ -102,7 +101,6 @@
       transition: transform 0.6s cubic-bezier(0.16,1,0.3,1), opacity 0.45s ease;
       transform-origin: 50% 0%;
     }
-    /* coin légèrement décollé */
     .postit::after {
       content: ''; position: absolute; right: 0; bottom: 0;
       width: 34px; height: 34px;
@@ -110,8 +108,6 @@
     }
     .postit h3 { font-size: 32px; font-weight: 700; line-height: 1; margin-bottom: 10px; }
     .postit p  { font-size: 22px; font-weight: 500; line-height: 1.15; }
-
-    /* états : actif / en dessous / soulevé */
     .postit.is-active { z-index: 3; opacity: 1; transform: rotate(-2deg); }
     .postit.is-next   { z-index: 2; opacity: 1; transform: translate(8px, 8px) rotate(2deg); }
     .postit.is-past   { z-index: 1; opacity: 0; transform: translate(-40px, -70px) rotate(-14deg); pointer-events: none; }
@@ -119,23 +115,35 @@
 
     /* PROJECTS */
     #projets { padding: 40px 0 120px; }
-    .projects-list { display: flex; flex-direction: column; gap: 1px; }
+    .projects-list { display: flex; flex-direction: column; gap: 14px; }
     .project-card {
+      position: relative;
       background: var(--surface); border: 1px solid var(--border);
-      border-radius: 4px; text-decoration: none; color: inherit; display: block;
-      transition: border-color 0.3s, background 0.3s; overflow: hidden;
+      border-radius: 16px; text-decoration: none; color: inherit; display: block;
+      overflow: hidden;
+      transition: border-color 0.3s ease, box-shadow 0.35s ease, background 0.3s ease;
     }
-    .project-card:first-child { border-radius: 16px 16px 4px 4px; }
-    .project-card:last-child  { border-radius: 4px 4px 16px 16px; }
+    /* CONTOUR NÉON DORÉ AU SURVOL */
+    .project-card:hover,
+    .project-card:focus-visible {
+      z-index: 2;
+      outline: none;
+      border-color: var(--neon);
+      box-shadow:
+        0 0 0 1px var(--neon),
+        0 0 14px rgba(240,198,116,0.55),
+        0 0 36px rgba(240,198,116,0.28),
+        inset 0 0 18px rgba(240,198,116,0.08);
+    }
     .project-inner {
       padding: 36px 40px;
       display: grid; grid-template-columns: 1fr auto;
       gap: 24px; align-items: start;
       transition: background 0.3s;
     }
-    .project-card:hover { border-color: rgba(201,169,110,0.2); }
     .project-card:hover .project-inner { background: var(--surface2); }
-    .project-num { font-family: var(--mono); font-size: 11px; color: var(--subtle); margin-bottom: 12px; }
+    .project-num { font-family: var(--mono); font-size: 11px; color: var(--subtle); margin-bottom: 12px; transition: color 0.3s; }
+    .project-card:hover .project-num { color: var(--neon); }
     .project-title { font-family: var(--serif); font-size: 24px; font-weight: 400; letter-spacing: -0.01em; margin-bottom: 12px; line-height: 1.2; }
     .project-desc { color: var(--muted); font-size: 14.5px; line-height: 1.7; margin-bottom: 24px; max-width: 520px; }
     .tags { display: flex; flex-wrap: wrap; gap: 7px; }
@@ -148,15 +156,7 @@
       transition: all 0.3s cubic-bezier(0.16,1,0.3,1);
       flex-shrink: 0; margin-top: 4px;
     }
-    .project-card:hover .project-arrow { background: var(--accent); color: #0c0c0e; border-color: var(--accent); transform: rotate(-45deg); }
-    .coming-soon .project-arrow { opacity: 0.3; cursor: default; }
-    .badge-soon {
-      display: inline-flex; align-items: center; gap: 6px;
-      font-family: var(--mono); font-size: 10px;
-      color: var(--muted); background: var(--bg);
-      border: 1px solid var(--border); border-radius: 99px;
-      padding: 3px 10px; margin-bottom: 12px;
-    }
+    .project-card:hover .project-arrow { background: var(--neon); color: #0c0c0e; border-color: var(--neon); transform: rotate(-45deg); }
 
     /* FOOTER */
     footer { padding: 48px 0; border-top: 1px solid var(--border); margin-top: 40px; }
@@ -169,12 +169,17 @@
     .reveal.in { opacity: 1; transform: none; }
     .reveal-d1 { transition-delay: 0.1s; }
     .reveal-d2 { transition-delay: 0.2s; }
+    /* garde l'animation du néon fluide malgré .reveal */
+    .project-card.reveal {
+      transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1),
+                  border-color 0.3s ease, box-shadow 0.35s ease, background 0.3s ease;
+    }
+    .project-card.reveal.in { transition-delay: 0s; }
 
     @media (prefers-reduced-motion: reduce) {
       * { animation: none !important; transition: none !important; }
       .section-eyebrow, h1, .page-desc, .stage, .reveal { opacity: 1 !important; transform: none !important; }
     }
-
     @media (max-width: 760px) {
       .header-row { flex-direction: column; align-items: flex-start; gap: 36px; }
       .stage { align-self: center; }
@@ -280,11 +285,10 @@
           </div>
         </a>
 
-        <div class="project-card coming-soon reveal reveal-d2">
+        <a href="https://drive.google.com/file/d/1YnPCzZ-lM9QLPC0VHxlanzreMJk0vqb6/view?usp=sharing" target="_blank" rel="noreferrer" class="project-card reveal reveal-d2">
           <div class="project-inner">
             <div>
               <p class="project-num">003</p>
-              <span class="badge-soon">● En cours</span>
               <h2 class="project-title">Application web back-end</h2>
               <p class="project-desc">Application dynamique avec gestion sécurisée des données, sessions utilisateurs et traitement des requêtes. PHP &amp; SQL.</p>
               <div class="tags">
@@ -295,7 +299,7 @@
             </div>
             <div class="project-arrow">↗</div>
           </div>
-        </div>
+        </a>
 
       </div>
     </section>
@@ -309,11 +313,9 @@
   </footer>
 
   <script>
-    // Nav au scroll
     const nav = document.getElementById('nav');
     window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 40));
 
-    // Reveal au scroll
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); observer.unobserve(e.target); } });
     }, { threshold: 0.07 });
