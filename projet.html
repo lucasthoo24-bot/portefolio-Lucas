@@ -108,10 +108,11 @@
     }
     .postit h3 { font-size: 32px; font-weight: 700; line-height: 1; margin-bottom: 10px; }
     .postit p  { font-size: 22px; font-weight: 500; line-height: 1.15; }
-    .postit.is-active { z-index: 3; opacity: 1; transform: rotate(-2deg); }
-    .postit.is-next   { z-index: 2; opacity: 1; transform: translate(8px, 8px) rotate(2deg); }
+    .postit.is-active { z-index: 4; opacity: 1; transform: rotate(-2deg); }
+    .postit.is-next   { z-index: 3; opacity: 1; transform: translate(8px, 8px) rotate(2deg); }
+    .postit.is-later  { z-index: 2; opacity: 1; transform: translate(15px, 15px) rotate(-1deg); }
     .postit.is-past   { z-index: 1; opacity: 0; transform: translate(-40px, -70px) rotate(-14deg); pointer-events: none; }
-    .postit.is-next *, .postit.is-past * { visibility: hidden; }
+    .postit.is-next *, .postit.is-later *, .postit.is-past * { visibility: hidden; }
 
     /* PROJECTS */
     #projets { padding: 40px 0 120px; }
@@ -238,6 +239,10 @@
               <h3>Projet 2</h3>
               <p>Configuration de Windows et installation des applications propres à l'entreprise</p>
             </article>
+            <article class="postit is-later">
+              <h3>Projet 3</h3>
+              <p>Installation de nouvelle box internet reliée à la mairie</p>
+            </article>
           </div>
 
           <button class="arrow" id="next" aria-label="Projet suivant">
@@ -262,57 +267,38 @@
                 <span class="tag">WordPress</span>
                 <span class="tag">CMS</span>
                 <span class="tag">HTML</span>
-                <span class="tag">CSS</span>
               </div>
             </div>
             <div class="project-arrow">↗</div>
           </div>
         </a>
 
-        <a href="https://drive.google.com/file/d/1h_LN5QAZpbWKG7hTbYAKfWu3bkVbvauh/view?usp=drive_link" target="_blank" rel="noreferrer" class="project-card reveal reveal-d1">
+        <a href="https://github.com/levygrd/cassebriques" target="_blank" rel="noreferrer" class="project-card reveal reveal-d1">
           <div class="project-inner">
             <div>
               <p class="project-num">002</p>
-              <h2 class="project-title">Veille informatique — IA générative</h2>
+              <h2 class="project-title">CasseBrique</h2>
+              <p class="project-desc">Jeu de casse-briques,déplacement, rebonds de la balle, destruction des briques et gestion du score. Code source disponible sur GitHub.</p>
+              <div class="tags">
+                <span class="tag">JavaScript</span>
+                <span class="tag">HTML</span>
+                <span class="tag">GitHub</span>
+              </div>
+            </div>
+            <div class="project-arrow">↗</div>
+          </div>
+        </a>
+
+        <a href="https://drive.google.com/file/d/1h_LN5QAZpbWKG7hTbYAKfWu3bkVbvauh/view?usp=drive_link" target="_blank" rel="noreferrer" class="project-card reveal reveal-d2">
+          <div class="project-inner">
+            <div>
+              <p class="project-num">003</p>
+              <h2 class="project-title">Veille informatique — IA générative (non actualisé)</h2>
               <p class="project-desc">Veille technologique approfondie sur l'intelligence artificielle générative. Analyse des avancées récentes, des outils majeurs (ChatGPT, Midjourney, Stable Diffusion…) et de leurs impacts sur les métiers du numérique.</p>
               <div class="tags">
                 <span class="tag">Veille</span>
                 <span class="tag">IA Générative</span>
-                <span class="tag">LLM</span>
                 <span class="tag">Recherche</span>
-              </div>
-            </div>
-            <div class="project-arrow">↗</div>
-          </div>
-        </a>
-
-        <a href="https://drive.google.com/file/d/1YnPCzZ-lM9QLPC0VHxlanzreMJk0vqb6/view?usp=sharing" target="_blank" rel="noreferrer" class="project-card reveal reveal-d2">
-          <div class="project-inner">
-            <div>
-              <p class="project-num">003</p>
-              <h2 class="project-title">GLPI</h2>
-              <p class="project-desc">Documentation du projet GLPI.</p>
-              <div class="tags">
-                <span class="tag">GLPI</span>
-                <span class="tag">Gestion de parc</span>
-                <span class="tag">Documentation</span>
-              </div>
-            </div>
-            <div class="project-arrow">↗</div>
-          </div>
-        </a>
-
-        <a href="https://github.com/levygrd/cassebriques" target="_blank" rel="noreferrer" class="project-card reveal reveal-d3">
-          <div class="project-inner">
-            <div>
-              <p class="project-num">004</p>
-              <h2 class="project-title">CasseBrique</h2>
-              <p class="project-desc">Jeu de casse-briques développé de A à Z : déplacement de la raquette, rebonds de la balle, destruction des briques et gestion du score. Code source disponible sur GitHub.</p>
-              <div class="tags">
-                <span class="tag">JavaScript</span>
-                <span class="tag">HTML</span>
-                <span class="tag">CSS</span>
-                <span class="tag">GitHub</span>
               </div>
             </div>
             <div class="project-arrow">↗</div>
@@ -349,8 +335,8 @@
       notes.forEach((note, i) => {
         note.classList.toggle('is-active', i === current);
         note.classList.toggle('is-next', i === current + 1);
+        note.classList.toggle('is-later', i > current + 1);
         note.classList.toggle('is-past', i < current);
-        if (i > current + 1) note.classList.add('is-next');
       });
       prev.disabled = current === 0;
       next.disabled = current === notes.length - 1;
